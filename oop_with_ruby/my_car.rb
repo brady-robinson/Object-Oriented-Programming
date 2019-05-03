@@ -1,13 +1,14 @@
-class MyCar
-  attr_accessor :color
-  attr_reader :year
-  @@gas_milage = 35
+class Vehicle
+   attr_accessor :color
+   attr_reader :year
+   @@gas_milage = 35
 
-  def initialize(year, model, color)
+   def initialize(year, type, model, color)
     @year = year
     @model = model
     @color = color
     @current_speed = 0
+    @type = type
   end
 
   def self.gas_mileage(gallons, miles)
@@ -41,7 +42,11 @@ class MyCar
     self.color = color
     puts "Your new #{color} paint job looks great!"
   end
+end
 
+class MyCar < Vehicle
+  TYPE = "car"
+  
   def to_s
     "Your #{year} #{model} is #{color} and gets #{MyCar.gas_mileage(12, 351)}"
   end
