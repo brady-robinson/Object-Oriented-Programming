@@ -12,17 +12,35 @@ class Box
     puts "Box count is : #{@@count}"
   end
 
-  def getArea
-    @width * @height
+  def getWidth
+    @width
   end
 
+  def getHeight
+    @height
+  end
+
+  private :getWidth, :getHeight
+
+  def printArea
+    @area = getWidth * getHeight
+    puts "Big box area is : #{@area}"
+  end
+
+  protected :printArea
+
   def to_s
-    "(w:#{@width},h:#{height})"
+    "(w:#{@width},h:#{@height})"
   end
 end
 
 box = Box.new(10,20)
-puts "String representation of box is : #{box}"
+a = box.getArea
+puts "Area of the box is : #{a}"
+box.printArea
+
+
+# puts "String representation of box is : #{box}"
 
 # box2 = Box.new(30, 40)
 
