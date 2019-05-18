@@ -29,5 +29,12 @@ class GoodDog < Animal
   include Climbable
 end
 
+puts "---Animal method Lookup---"
+puts Animal.ancestors
+
 puts "---GoodDog method lookup---"
 puts GoodDog.ancestors
+
+fido = GoodDog.new
+puts fido.speak
+fido.swim
