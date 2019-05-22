@@ -1,8 +1,5 @@
 class Move
   VALUES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
-  def initialize(value)
-    @value = value
-  end
 
   def >(other_move)
     (rock? && other_move.scissors?) ||
@@ -34,30 +31,50 @@ class Move
 end
 
 class Rock < Move
+  def initialize
+    @value = 'rock'
+  end
+
   def rock?
     @value == 'rock'
   end
 end
 
 class Paper < Move
+  def initialize
+    @value = 'paper'
+  end
+
   def paper?
     @value == 'paper'
   end
 end
 
 class Scissors < Move
+  def initialize
+    @value = 'scissors'
+  end
+
   def scissors?
     @value == 'scissors'
   end
 end
 
 class Lizard < Move
+  def initialize
+    @value = 'lizard'
+  end
+
   def lizard?
     @value == 'lizard'
   end
 end
 
 class Spock < Move
+  def initialize
+    @value = 'spock'
+  end
+
   def spock?
     @value == 'spock'
   end
@@ -68,6 +85,16 @@ class Player
 
   def initialize
     set_name
+  end
+
+  def choose_class(choice)
+    case choice
+    when 'rock' then Rock.new
+    when 'scissors' then Scissors.new
+    when 'paper' then Paper.new
+    when 'lizard' then Lizard.new
+    when 'spock' then Spock.new
+    end
   end
 end
 
@@ -87,11 +114,12 @@ class Human < Player
     choice = nil
     loop do
       puts "Please choose rock, paper, scissors, lizard, or spock:"
-      choice = gets.chomp
+      choice = gets.chomp.downcase
       break if Move::VALUES.include? choice
       puts 'Sorry, invalid choice.'
     end
-    self.move = Move.new(choice)
+    self.move = choose_class(choice)
+    self.move = self.move.to_s
   end
 end
 
@@ -101,7 +129,8 @@ class Computer < Player
   end
 
   def choose
-    self.move = Move.new(Move::VALUES.sample)
+    self.move = [Rock.new, Scissors.new, Paper.new, Lizard.new, Spock.new].sample
+    self.move = self.move.to_s
   end
 end
 
